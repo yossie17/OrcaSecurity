@@ -1,0 +1,22 @@
+pipeline {
+    agent any 
+   
+
+    stages {
+        stage('Build') { 
+            steps {
+                sh 'docker-compose -f "docker-compose" build --build-arg DATABASE_URL=env.DATABASE_URL app' 
+            }
+        }
+         
+            }
+            
+        }
+        stage('Deploy') { 
+            steps {
+                sh 'docker-compose -f "docker-compose" up -d' 
+                sh 'echo ${TEST_CHOICE}' 
+            }
+        }
+    }
+}
