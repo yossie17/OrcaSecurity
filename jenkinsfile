@@ -1,21 +1,21 @@
 pipeline {
     agent any 
-   
-
+    parameters {
+        string(name: 'TEST_PARM', defaultValue: 'True', description: 'some test param')
+        choice(name: 'TEST_CHOICE', choices: ['1', '2', '3'], description: 'some choice param')
+        booleanParam(name: 'TEST_BOOL_PARM', defaultValue: 'True', description: 'some test boolean param' )
+    }
+    
     stages {
         stage('Build') { 
             steps {
                 sh 'docker-compose -f "docker-compose" build --build-arg DATABASE_URL=env.DATABASE_URL app' 
             }
         }
-         
-            }
-            
-        }
+       
         stage('Deploy') { 
             steps {
-                sh 'docker-compose -f "docker-compose" up -d' 
-                sh 'echo ${TEST_CHOICE}' 
+                sh 'docker-compose -f "docker-compose" up -d'
             }
         }
     }
