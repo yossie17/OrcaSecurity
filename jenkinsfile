@@ -1,10 +1,6 @@
 pipeline {
     agent any 
-    parameters {
-        string(name: 'TEST_PARM', defaultValue: 'True', description: 'some test param')
-        choice(name: 'TEST_CHOICE', choices: ['1', '2', '3'], description: 'some choice param')
-        booleanParam(name: 'TEST_BOOL_PARM', defaultValue: 'True', description: 'some test boolean param' )
-    }
+    
     
     stages {
         stage('Build') { 
